@@ -5,9 +5,11 @@ import {
   JoinColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  Entity,
 } from 'typeorm';
 import Category from './Category';
 
+@Entity('transactions')
 class Transaction {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -18,7 +20,7 @@ class Transaction {
   @Column()
   type: 'income' | 'outcome';
 
-  @Column()
+  @Column('int')
   value: number;
 
   @ManyToOne(() => Category)
