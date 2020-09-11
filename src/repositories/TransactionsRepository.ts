@@ -37,6 +37,16 @@ class TransactionsRepository extends Repository<Transaction> {
       total: income - outcome,
     };
   }
+
+  public async getTransactionsWithCategories(): Promise<Transaction[]> {
+    return this.createQueryBuilder('transactions')
+      .leftJoinAndMapOne(
+        'transactions.category',
+        'transactions.category_id',
+        'category',
+      )
+      .getMany();
+  }
 }
 
 export default TransactionsRepository;

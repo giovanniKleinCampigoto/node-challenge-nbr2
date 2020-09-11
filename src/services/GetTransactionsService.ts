@@ -17,8 +17,8 @@ interface TransactionsDTO {
 class GetTransactionsService {
   public async execute(): Promise<TransactionsDTO> {
     const transactionsRep = getCustomRepository(TransactionsRepository);
-    const transactions = await transactionsRep.find();
 
+    const transactions = await transactionsRep.getTransactionsWithCategories();
     const balance = await transactionsRep.getBalance();
 
     return {
