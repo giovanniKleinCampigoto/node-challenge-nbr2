@@ -1,6 +1,5 @@
 import { getRepository } from 'typeorm';
 
-import AppError from '../errors/AppError';
 import Category from '../models/Category';
 
 interface Request {
@@ -19,8 +18,9 @@ class CreateCategoryService {
 
     const newCategory = categoryRepository.create({ title });
 
-    await categoryRepository.save(newCategory);
-    return newCategory;
+    const createdCategory = await categoryRepository.save(newCategory);
+
+    return createdCategory;
   }
 }
 
